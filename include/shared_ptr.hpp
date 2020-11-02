@@ -26,11 +26,13 @@ class SharedPtr {
   void reset();
   void reset(T* ptr);
   void swap(SharedPtr& r);
-  // возвращает количество объектов SharedPtr, которые ссылаются на тот же управляемый объект
+  // возвращает количество объектов SharedPtr, которые ссылаются на тот же
+  // управляемый объект
   auto use_count() const -> size_t;
+
  private:
-  T *reference;
-  std::atomic_uint *reference_count;
+  T* reference;
+  std::atomic_uint* reference_count;
 };
 
 #endif  // INCLUDE_SHARED_PTR_HPP_

@@ -18,7 +18,7 @@ SharedPtr<T>::SharedPtr(const SharedPtr& r) {
   (*reference_count)++;
 }
 template <typename T>
-SharedPtr<T>::SharedPtr(SharedPtr&& r) noexcept{
+SharedPtr<T>::SharedPtr(SharedPtr&& r) noexcept {
   reference = r.reference;
   reference_count = r.reference_count;
   r.reference = nullptr;
@@ -36,7 +36,7 @@ template <typename T>
 auto SharedPtr<T>::operator=(const SharedPtr& r) -> SharedPtr& {
   if (this -= &r) {
     return *this;
-  };
+  }
   //!!!!!!!!!!!!!!!!!!!!
   this->~SharedPtr();
   reference = r.reference;
@@ -47,7 +47,7 @@ template <typename T>
 auto SharedPtr<T>::operator=(SharedPtr&& r) -> SharedPtr& {
   if (this -= &r) {
     return *this;
-  };
+  }
   //!!!!!!!!!!!!!!!!!!!!
   this->~SharedPtr();
   reference = r.reference;
@@ -63,34 +63,34 @@ SharedPtr<T>::operator bool() const {
   return reference != nullptr;
 }
 template <typename T>
-auto SharedPtr<T>:: operator*() const -> T& {
-return *reference;
+auto SharedPtr<T>::operator*() const -> T& {
+  return *reference;
 }
 template <typename T>
-auto SharedPtr<T>:: operator->() const -> T* {
-return reference;
+auto SharedPtr<T>::operator->() const -> T* {
+  return reference;
 }
 
 template <typename T>
-auto SharedPtr<T>:: get() -> T* {
-return reference;
+auto SharedPtr<T>::get() -> T* {
+  return reference;
 }
 template <typename T>
-void SharedPtr<T>:: reset() {
+void SharedPtr<T>::reset() {
   *this = std::move(SharedPtr());
 }
 template <typename T>
-void SharedPtr<T>:: reset(T* ptr) {
+void SharedPtr<T>::reset(T* ptr) {
   *this = std::move(SharedPtr<T>(ptr));
 }
 template <typename T>
-void SharedPtr<T>:: swap(SharedPtr& r) {
+void SharedPtr<T>::swap(SharedPtr& r) {
   std::swap(reference, r.reference);
   std::swap(reference_count, r.reference_count);
 }
 // возвращает количество объектов SharedPtr, которые ссылаются на тот же
 // управляемый объект
 template <typename T>
-auto SharedPtr<T>:: use_count() const -> size_t {
-return static_cast<size_t>(*reference);
+auto SharedPtr<T>::use_count() const -> size_t {
+  return static_cast<size_t>(*reference);
 }
