@@ -21,7 +21,7 @@ class SharedPtr {
   explicit operator bool() const;
   auto operator*() const -> T&;
   auto operator->() const -> T*;
-
+// специальные функции
   auto get() -> T*;
   void reset();
   void reset(T* ptr);
