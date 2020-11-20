@@ -34,7 +34,7 @@ SharedPtr<T>::~SharedPtr() {
 }
 template <typename T>
 auto SharedPtr<T>::operator=(const SharedPtr& r) -> SharedPtr& {
-  if (this -= &r) {
+  if (this == &r) {
     return *this;
   }
   //!!!!!!!!!!!!!!!!!!!!
@@ -45,7 +45,7 @@ auto SharedPtr<T>::operator=(const SharedPtr& r) -> SharedPtr& {
 }
 template <typename T>
 auto SharedPtr<T>::operator=(SharedPtr&& r) -> SharedPtr& {
-  if (this -= &r) {
+  if (this == &r) {
     return *this;
   }
   //!!!!!!!!!!!!!!!!!!!!
