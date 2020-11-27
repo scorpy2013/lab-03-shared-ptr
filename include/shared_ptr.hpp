@@ -126,4 +126,4 @@ auto SharedPtr<T>::use_count() const -> size_t {
   return static_cast<size_t>(*counter);
 }
 
-#endif  // INCLUDE_SHARED_HPP_
+#endif  // INCLUDE_SHARED_PTR_HPP_
