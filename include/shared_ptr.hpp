@@ -45,15 +45,15 @@ SharedPtr<T>::SharedPtr(T *ptr) {
 }
 template <typename T>
 SharedPtr<T>::SharedPtr(const SharedPtr &r) : counter{nullptr} {
-  reference = r.pointer;
+  reference = r.reference;
   counter = r.counter;
   (*counter)++;
 }
 template <typename T>
 SharedPtr<T>::SharedPtr(SharedPtr &&r) noexcept : counter{nullptr} {
-  reference = r.pointer;
+  reference = r.reference;
   counter = r.counter;
-  r.pointer = nullptr;
+  r.reference = nullptr;
   r.counter = nullptr;
 }
 template <typename T>
@@ -70,7 +70,7 @@ auto SharedPtr<T>::operator=(const SharedPtr &r) -> SharedPtr & {
     return *this;
   }
   this->~SharedPtr();
-  reference = r.pointer;
+  reference = r.reference;
   counter = r.counter;
   (*counter)++;
   return *this;
@@ -81,9 +81,9 @@ auto SharedPtr<T>::operator=(SharedPtr &&r) noexcept -> SharedPtr & {
     return *this;
   }
   this->~SharedPtr();
-  reference = r.pointer;
+  reference = r.reference;
   counter = r.counter;
-  r.pointer = nullptr;
+  r.reference = nullptr;
   r.counter = nullptr;
   return *this;
 }
@@ -118,7 +118,7 @@ void SharedPtr<T>::reset(T *ptr) {
 }
 template <typename T>
 void SharedPtr<T>::swap(SharedPtr &r) {
-  std::swap(reference, r.pointer);
+  std::swap(reference, r.reference);
   std::swap(counter, r.counter);
 }
 template <typename T>
