@@ -134,3 +134,25 @@ TEST(SharedPtr, Bool_Operator) {
   ASSERT_EQ(shared_ptr2.operator bool(), true);
 }
 
+template <class T>
+auto IsCopyAssignment(T& reference1, T& reference2) -> T& {
+  reference1 = reference2;
+  return reference1;
+}
+TEST(SharedPtr, ThisCopyAssigment) {
+  SharedPtr shared_ptr1{new int{45345435}};
+
+  EXPECT_EQ(*IsCopyAssignment(shared_ptr1, shared_ptr1), 45345435);
+  EXPECT_EQ(IsCopyAssignment<SharedPtr<int>>(shared_ptr1, shared_ptr1).use_count(), 1);
+}
+template <class T>
+auto IsMoveAssignment(T& reference1, T& reference2) -> T& {
+  reference1 = std::move(reference2);
+  return reference1;
+}
+TEST(SharedPtr, IsMoveAssignment) {
+  SharedPtr shared_ptr1{new int{45345435}};
+
+  EXPECT_EQ(*IsMoveAssignment(shared_ptr1, shared_ptr1), 45345435);
+  EXPECT_EQ(IsMoveAssignment(shared_ptr1, shared_ptr1).use_count(), 1);
+}
