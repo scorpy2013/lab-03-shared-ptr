@@ -133,14 +133,4 @@ TEST(SharedPtr, Bool_Operator) {
   ASSERT_EQ(shared_ptr1.operator bool(), false);
   ASSERT_EQ(shared_ptr2.operator bool(), true);
 }
-template <class T>
-auto selfCopyAssignment(T& value1, T& value2) -> T& {
-  value1 = value2;
-  return value1;
-}
-TEST(SharedPtr, ThisCopyAssigment) {
-  SharedPtr ptr1{new int{5555}};
 
-  EXPECT_EQ(*selfCopyAssignment(ptr1, ptr1), 5555);
-  EXPECT_EQ(selfCopyAssignment<SharedPtr<int>>(ptr1, ptr1).use_count(), 1);
-}
