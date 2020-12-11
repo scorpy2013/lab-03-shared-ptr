@@ -143,7 +143,9 @@ TEST(SharedPtr, ThisCopyAssigment) {
   SharedPtr shared_ptr1{new int{45345435}};
 
   EXPECT_EQ(*IsCopyAssignment(shared_ptr1, shared_ptr1), 45345435);
-  EXPECT_EQ(IsCopyAssignment<SharedPtr<int>>(shared_ptr1, shared_ptr1).use_count(), 1);
+  EXPECT_EQ(
+      IsCopyAssignment<SharedPtr<int>>(shared_ptr1, shared_ptr1).use_count(),
+      1);
 }
 template <class T>
 auto IsMoveAssignment(T& reference1, T& reference2) -> T& {
